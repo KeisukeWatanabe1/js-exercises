@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { abs, sum, factorial } from "./index.ts";
+import { abs, sum, factorial } from "./index.js";
 
 describe("math", () => {
   describe("abs", () => {

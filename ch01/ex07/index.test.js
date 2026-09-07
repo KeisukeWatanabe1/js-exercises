@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { Point } from "./index.ts";
+import { Point } from "./index.js";
 
 describe("Point#add", () => {
   it("adds positive coordinates", () => {

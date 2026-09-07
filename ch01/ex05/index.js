@@ -1,4 +1,4 @@
-export function abs(num: number) {
+export function abs(num) {
   if (num >= 0) {
     return num;
   } else {
@@ -6,7 +6,7 @@ export function abs(num: number) {
   }
 }
 
-export function sum(array: number[]) {
+export function sum(array) {
   let sum = 0;
   for (let x of array) {
     sum += x;
@@ -14,7 +14,7 @@ export function sum(array: number[]) {
   return sum;
 }
 
-export function factorial(num: number) {
+export function factorial(num) {
   let i,
     product = 1;
   for (i = 2; i <= num; i++) {

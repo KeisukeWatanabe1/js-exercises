@@ -7,7 +7,7 @@
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
 # プログラムを実行
-cat .\sorekara.txt | node .\index.ts
+cat .\sorekara.txt | node .\index.js
 ```
 
 # 結果

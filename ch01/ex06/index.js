@@ -1,4 +1,4 @@
-export function fib(x: number) {
+export function fib(x) {
   if (!Number.isInteger(x) || x < 1) {
     throw new Error("x must be a positive integer");
   }

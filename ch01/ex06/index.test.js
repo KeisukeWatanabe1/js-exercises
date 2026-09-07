@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { fib } from "./index.ts";
+import { fib } from "./index.js";
 
 describe("fibonacci sequence", () => {
   it("throws when zero given", () => {
