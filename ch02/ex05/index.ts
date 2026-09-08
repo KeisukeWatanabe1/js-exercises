@@ -10,78 +10,78 @@
 // このクラスでは、Mapを拡張して、キーがマップ上に存在しないときに、
 // get()メソッドがnullの代わりに指定した値を返すようにする。
 class DefaultMap extends Map {
-  defaultValue: number
+  defaultValue: number;
 
   constructor(defaultValue: number) {
-    super() // 親クラスのコンストラクタを呼び出す。
-    this.defaultValue = defaultValue // デフォルト値を記録する。
+    super(); // 親クラスのコンストラクタを呼び出す。
+    this.defaultValue = defaultValue; // デフォルト値を記録する。
   }
 
   get(key: string) {
     if (this.has(key)) {
       // マップ中にキーが存在すれば、
-      return super.get(key) // 親クラス中の値を返す。
+      return super.get(key); // 親クラス中の値を返す。
     } else {
-      return this.defaultValue // 存在しなければ、デフォルト値を返す。
+      return this.defaultValue; // 存在しなければ、デフォルト値を返す。
     }
   }
 }
 
 // このクラスは、文字頻度ヒストグラムを計算し、表示する。
 class Histogram {
-  letterCounts: DefaultMap
-  totalLetters: number
+  letterCounts: DefaultMap;
+  totalLetters: number;
 
   constructor() {
-    this.letterCounts = new DefaultMap(0) // 文字と文字数をマップする
-    this.totalLetters = 0
+    this.letterCounts = new DefaultMap(0); // 文字と文字数をマップする
+    this.totalLetters = 0;
   }
 
   // この関数は、text中の文字でヒストグラムを更新する。
   add(text: string) {
     // テキストから空白文字を取り除き、すべての文字を大文字に変換する。
-    text = text.replace(/\s/g, "").toUpperCase()
+    text = text.replace(/\s/g, "").toUpperCase();
 
     // テキスト中の文字をループする。
     for (let character of text) {
-      let count = this.letterCounts.get(character) // 直前の値を取得する。
-      this.letterCounts.set(character, count + 1) // 1増やす。
-      this.totalLetters++
+      let count = this.letterCounts.get(character); // 直前の値を取得する。
+      this.letterCounts.set(character, count + 1); // 1増やす。
+      this.totalLetters++;
     }
   }
 
   // ヒストグラムを文字列に変換して、ASCIIグラフィックとして表示する。
   toString() {
     // マップを、[キー、文字数]配列に変換する
-    let entries = [...this.letterCounts]
+    let entries = [...this.letterCounts];
 
     // 文字数順にソートする。文字数が同じ場合は、アルファベット順でソートする。
     entries.sort((a, b) => {
       // ソート順を定義する関数。
       if (a[1] === b[1]) {
         // 文字数が同じ場合は、
-        return a[0] < b[0] ? -1 : 1 // アルファベット順でソートする
+        return a[0] < b[0] ? -1 : 1; // アルファベット順でソートする
       } else {
         // 文字数が異なる場合は、
-        return b[1] - a[1]
+        return b[1] - a[1];
       }
-    })
+    });
 
     // 文字数をパーセントに変換する。
     for (let entry of entries) {
-      entry[1] = (entry[1] / this.totalLetters) * 100
+      entry[1] = (entry[1] / this.totalLetters) * 100;
     }
 
     // 1%未満の文字は表示しない
-    entries = entries.filter((entry) => entry[1] >= 1)
+    entries = entries.filter((entry) => entry[1] >= 1);
 
     // 各項目を一行のテキストに変換する。
     let lines = entries.map(
       ([l, n]) => `${l}: ${"#".repeat(Math.round(n))} ${n.toFixed(2)}%`,
-    )
+    );
 
     // 各行を改行文字で区切って結合し、結合した文字列を返す。
-    return lines.join("\n")
+    return lines.join("\n");
   }
 }
 
@@ -89,16 +89,16 @@ class Histogram {
 // 標準入力からテキストを非同期に読み出し、読みだしたテキストをヒストグラムに
 // 追加する。テキストを最後まで読みだしたら、ヒストグラムを返す。
 async function histogramFromStdin() {
-  process.stdin.setEncoding("utf-8") // バイト列ではなく、Unicode文字列を読む。
-  let histogram = new Histogram()
+  process.stdin.setEncoding("utf-8"); // バイト列ではなく、Unicode文字列を読む。
+  let histogram = new Histogram();
   for await (let chunk of process.stdin) {
-    histogram.add(chunk)
+    histogram.add(chunk);
   }
-  return histogram
+  return histogram;
 }
 
 // この最後の一行がこのプログラムのメイン部分。
 // 標準入力からHistogramオブジェクトを生成、ヒストグラムを表示する。
 histogramFromStdin().then((histogram) => {
-  console.log(histogram.toString())
-})
+  console.log(histogram.toString());
+});

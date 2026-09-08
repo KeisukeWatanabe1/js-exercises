@@ -25,7 +25,6 @@ class WordHistogram {
 
   // この関数は、text中の単語でヒストグラムを更新する。
   add(text) {
-    
     const matches = text.toLowerCase().matchAll(/\w+|\$[\d.]+|\S+/g);
     const words = [...matches].map((r) => r[0]);
 
@@ -63,7 +62,7 @@ class WordHistogram {
     entries = entries.filter((entry) => entry[1] >= 0.5);
     // padStart で表示幅を揃える / # の数を n ではなく 10 * n に変更
     const lines = entries.map(
-    ([l, n]) =>
+      ([l, n]) =>
         `${l.padStart(10)}: ${"#".repeat(Math.round(10 * n))} ${n.toFixed(2)}%`,
     );
 

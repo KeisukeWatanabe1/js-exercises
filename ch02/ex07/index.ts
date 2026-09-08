@@ -4,7 +4,7 @@ let a = 0,
 // prettier-ignore
 const c
 =
-a
+a;
 // prettier-ignore
 ++
 b
@@ -12,7 +12,7 @@ b
 console.log(a, b, c);
 
 // prettier-ignore
-const e = a++
+const e = a++;
 b;
 
 console.log(a, b, e);
