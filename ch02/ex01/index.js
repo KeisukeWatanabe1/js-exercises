@@ -10,14 +10,12 @@
 // このクラスでは、Mapを拡張して、キーがマップ上に存在しないときに、
 // get()メソッドがnullの代わりに指定した値を返すようにする。
 class DefaultMap extends Map {
-  defaultValue: number;
-
-  constructor(defaultValue: number) {
+  constructor(defaultValue) {
     super(); // 親クラスのコンストラクタを呼び出す。
     this.defaultValue = defaultValue; // デフォルト値を記録する。
   }
 
-  get(key: string) {
+  get(key) {
     if (this.has(key)) {
       // マップ中にキーが存在すれば、
       return super.get(key); // 親クラス中の値を返す。
@@ -29,16 +27,13 @@ class DefaultMap extends Map {
 
 // このクラスは、文字頻度ヒストグラムを計算し、表示する。
 class Histogram {
-  letterCounts: DefaultMap;
-  totalLetters: number;
-
   constructor() {
     this.letterCounts = new DefaultMap(0); // 文字と文字数をマップする
     this.totalLetters = 0;
   }
 
   // この関数は、text中の文字でヒストグラムを更新する。
-  add(text: string) {
+  add(text) {
     // テキストから空白文字を取り除き、すべての文字を大文字に変換する。
     text = text.replace(/\s/g, "").toUpperCase();
 
