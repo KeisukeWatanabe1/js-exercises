@@ -1,8 +1,8 @@
-export function isEqual(a: number, b: number) {
+export function isEqual(a, b) {
   if (a === b) {
     return true;
   } else {
-    let diff: number = Math.abs(a - b);
+    let diff = Math.abs(a - b);
     return diff < 10 ** -10 ? true : false;
   }
 }

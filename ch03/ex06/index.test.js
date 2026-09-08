@@ -1,4 +1,4 @@
-import { slice } from "./index.ts"; // typescript で書く場合は "./index.ts"
+import { slice } from "./index.js"; // typescript で書く場合は "./index.ts"
 import { test, expect } from "vitest";
 
 function sliceTestCase(str, indexStart, indexEnd) {

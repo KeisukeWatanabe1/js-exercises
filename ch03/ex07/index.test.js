@@ -1,4 +1,4 @@
-import { equalArrays } from "./index.ts";
+import { equalArrays } from "./index.js";
 import { test, expect } from "vitest";
 
 test("ch03-ex07", () => {

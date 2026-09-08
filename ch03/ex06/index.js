@@ -1,4 +1,4 @@
-export function slice(str: string, start?: number, end?: number) {
+export function slice(str, start, end) {
   const len = str.length;
 
   if (start === undefined || isNaN(start)) {

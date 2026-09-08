@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { LFtoCRLF, CRLFtoLF } from "./index.ts";
+import { LFtoCRLF, CRLFtoLF } from "./index.js";
 
 describe("line break code conversion", () => {
   describe("LFtoCRLF function", () => {

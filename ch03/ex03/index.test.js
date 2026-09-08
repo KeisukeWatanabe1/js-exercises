@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isEqual } from "./index.ts";
+import { isEqual } from "./index.js";
 
 describe("isEqual function", () => {
   it("returns true for exactly equal numbers", () => {
