@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { fizzbuzz } from "./index.ts";
+import { fizzbuzz } from "./index.js";
 
 describe("FizzBuzz", () => {
   it("1から100までのFizzBuzzの結果を返すこと", () => {
