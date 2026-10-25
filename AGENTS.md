@@ -8,13 +8,15 @@
 - 受講生がまだ自力の解答を書いていない課題について、解答コードの作成・修正を求められた場合は、まず自力で取り組むよう促してください。
 - 受講生が自力の解答を書き終えたあとの改善・レビュー依頼には協力して構いません。ただし**元の解答を消したり上書きしたりせず**、改善版は別ファイルにするか、元のコードをコメント等で残してください。
 - AI を利用した場合、受講生は「どう使ったか (プロンプト等)」を記録してコミットするルールになっています。作業した際はその記録 (例: `chXX/exYY/ai-usage.md`) を残すよう受講生に促してください。
-- エラーの読み方、ツール (npm, Vitest, ESLint, Prettier, Playwright) の使い方、環境構築のトラブルシューティングは制限なく手伝って構いません。
+- エラーの読み方、ツール (pnpm, Vitest, ESLint, Prettier, Playwright) の使い方、環境構築のトラブルシューティングは制限なく手伝って構いません。
 
 ## プロジェクト情報
 
 - 解答は `chXX/exYY/` 以下に配置します (例: 1 章の 5 問目は `ch01/ex05/`)。
-- `npm test` : Vitest による自動テスト (対象: `**/*.test.*`)
-- `npm run test:browser` : Playwright によるブラウザテスト (対象: `**/*.spec.*`)
-- `npm run lint` / `npm run format` : ESLint / Prettier
-- npm 12 以上が必須です (`.npmrc` の `engine-strict=true` で強制、サプライチェーン攻撃対策)。
-- `.npmrc` の `min-release-age=3` により、公開から 3 日未満のパッケージバージョンはインストールできません (`ENOVERSIONS` エラーになります)。これは意図した設定なので、勝手に緩和しないでください。
+- パッケージ管理は **pnpm** を使います (ロックファイルは `pnpm-lock.yaml`)。npm / yarn でインストールしないでください。
+- 実行は `node chXX/exYY/index.js` のように Node.js で直接行います (`package.json` が `"type": "module"` のため ES Modules として動きます)。
+- `pnpm test` : Vitest による自動テスト (対象: `**/*.test.*`)。1 問だけなら `pnpm vitest run chXX/exYY`
+- `pnpm test:browser` : Playwright によるブラウザテスト (対象: `**/*.spec.*`)
+- `pnpm lint` / `pnpm format` : ESLint / Prettier
+- WSL で作業する場合は、WSL 内に入れた Linux 版の Node.js / pnpm を使ってください (Windows 版 pnpm が `/mnt/c/...` 経由で使われると、ネイティブバイナリの不一致で動かないことがあります)。
+- `pnpm-workspace.yaml` の `minimumReleaseAge: 4320` (3 日) により、公開から 3 日未満のパッケージバージョンはインストールできません (サプライチェーン攻撃対策)。これは意図した設定なので、勝手に緩和しないでください。
