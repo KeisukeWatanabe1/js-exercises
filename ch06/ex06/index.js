@@ -15,7 +15,7 @@ export function getPropertyOf(o) {
 
 function mergeArray(arr1, arr2) {
   for (let element of arr2) {
-    if (element in arr1) {
+    if (arr1.includes(element)) {
       continue;
     }
     arr1.push(element);
