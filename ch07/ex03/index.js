@@ -7,23 +7,15 @@ export function join(arr, separator = ",") {
     return "";
   }
   const stringArr = arr.map((x) => [x].toString());
-  console.log(stringArr);
   return stringArr.reduce((joined, x) => joined + separator + x);
 }
 
 export function reverse(arr) {
-  if (arr.length === 0) {
-    return [];
-  }
-  if (arr.length === 1) {
-    return arr;
-  }
   const len = arr.length;
-  const reversed = new Array(len);
-  arr.forEach((x, i) => {
-    reversed[len - (i + 1)] = x;
-  });
-  return reversed;
+  return arr.reduce((reversed, x, index) => {
+    reversed[len - (index + 1)] = x;
+    return reversed;
+  }, []);
 }
 
 export function every(arr, condition) {
