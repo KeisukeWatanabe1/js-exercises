@@ -1,16 +1,11 @@
 export function sumMatrix(a, b) {
-  if (a.length === b.length) {
-    let sameSize = true;
-    for (let i = 0; i < a.length; i++) {
-      if (a[i].length !== b[i].length) {
-        sameSize = false;
-      }
+  if (a.length !== b.length) {
+    throw new Error("行列のサイズが違います");
+  }
+  for (let i = 0; i < a.length; i++) {
+    if (a[i].length !== b[i].length) {
+      throw new Error("行列のサイズが違います");
     }
-    if (!sameSize) {
-      throw Error("行列のサイズが違います");
-    }
-  } else {
-    throw Error("行列のサイズが違います");
   }
 
   const sum = new Array(a.length);
@@ -23,9 +18,9 @@ export function sumMatrix(a, b) {
   return sum;
 }
 
-export function multipleMatrix(a, b) {
-  if (a[0].length !== b.length) {
-    throw Error("行列のサイズが違います");
+export function multiplyMatrix(a, b) {
+  if (!possibleMultiply(a, b)) {
+    throw new Error("行列のサイズが違います");
   }
   const multiple = new Array(a.length);
   for (let i = 0; i < a.length; i++) {
@@ -40,13 +35,32 @@ export function multipleMatrix(a, b) {
   return multiple;
 }
 
-const a = [
-  [1, 5, 7],
-  [2, 3, 8],
-];
-const b = [
-  [4, 9],
-  [7, 2],
-  [1, 0],
-];
-console.log(multipleMatrix(a, b));
+function possibleMultiply(a, b) {
+  // 空配列は掛け算できない
+  if (a.length === 0 || b.length === 0) {
+    return false;
+  }
+  const rowA = a.length;
+  const colA = a[0].length;
+  const rowB = b.length;
+  const colB = b[0].length;
+
+  // 行列に欠けが無いかを確認する
+  for (let i = 0; i < rowA; i++) {
+    if (a[i].length !== colA) {
+      return false;
+    }
+  }
+
+  for (let i = 0; i < rowB; i++) {
+    if (b[i].length !== colB) {
+      return false;
+    }
+  }
+
+  if (colA === rowB) {
+    return true;
+  } else {
+    return false;
+  }
+}
