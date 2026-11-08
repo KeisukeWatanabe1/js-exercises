@@ -23,73 +23,54 @@ export function newHashTable(capacity) {
         this.entries[index] = { key: key, value: value, next: undefined };
         this.size++;
         return;
-      } else {
-        // インデックスが衝突した時は
-        // リンクリスト形式で保存する
-        let currentEntry = this.entries[index];
-        let prevEntry;
-        while (currentEntry) {
-          // 与えられたkeyのデータが既にあれば上書きする
-          if (currentEntry.key === key) {
-            currentEntry.value = value;
-            return;
-          }
-          prevEntry = currentEntry;
-          currentEntry = currentEntry.next;
-        }
-        // 与えられたkeyのデータが無ければ、
-        // リンクリストの末尾に保存する
-        prevEntry.next = {
-          key: key,
-          value: value,
-          next: undefined,
-        };
-        this.size++;
       }
+      // インデックスが衝突した時は
+      // リンクリスト形式で保存する
+      let entry = this.entries[index];
+      let prevEntry;
+      while (entry) {
+        // 与えられたkeyのデータが既にあれば上書きする
+        if (entry.key === key) {
+          entry.value = value;
+          return;
+        }
+        prevEntry = entry;
+        entry = entry.next;
+      }
+      // 与えられたkeyのデータが無ければ、
+      // リンクリストの末尾に保存する
+      prevEntry.next = {
+        key: key,
+        value: value,
+        next: undefined,
+      };
+      this.size++;
     },
     remove(key) {
       // keyのマッピングを削除する
       const index = hash(key) % capacity;
       if (!this.entries[index]) {
         return;
-      } else {
-        let entry = this.entries[index];
-        let prevEntry;
-        // 削除対象がリンクリスト中にあるかを確認する
-        while (entry) {
-          if (entry.key === key) {
-            // 削除対象がリンクリストの先頭の場合は、その先頭を消す
-            if (!prevEntry) {
-              if (entry.next) {
-                entry.key = entry.next.key;
-                entry.value = entry.next.value;
-                entry.next = entry.next.next;
-                this.size--;
-                return;
-              }
-              this.entries[index] = undefined;
-              this.size--;
-              return;
-            }
-            // 削除対象がリンクリストの末尾にある場合は、
-            // 1つ前のnextを削除する
-            if (entry.next === undefined) {
-              prevEntry.next = undefined;
-              this.size--;
-              return;
-            }
-
-            // 削除対象がリンクリストの途中にある場合は、
-            // 削除対象の一つ後で上書きする
-            entry.key = entry.next.key;
-            entry.value = entry.next.value;
-            entry.next = entry.next.next;
+      }
+      let entry = this.entries[index];
+      let prevEntry;
+      // 削除対象がリンクリスト中にあるかを確認する
+      while (entry) {
+        if (entry.key === key) {
+          // 削除対象がリンクリストの先頭の場合は、その先頭を飛ばすことで消す
+          if (!prevEntry) {
+            this.entries[index] = entry.next;
             this.size--;
             return;
           }
-          prevEntry = entry;
-          entry = entry.next;
+          // 削除対象がリンクリストの途中または末尾にある場合は、
+          // 1つ前のnextが削除対象のnextを指すようにする
+          prevEntry.next = entry.next;
+          this.size--;
+          return;
         }
+        prevEntry = entry;
+        entry = entry.next;
       }
     },
   };
