@@ -8,7 +8,7 @@ export function createPoint() {
     },
     set x(newx) {
       if (isNaN(newx)) {
-        throw Error("数値を設定してください");
+        throw new Error("数値を設定してください");
       }
       const oldy = this.y;
       this.r = Math.hypot(newx, oldy);
@@ -20,7 +20,7 @@ export function createPoint() {
     },
     set y(newy) {
       if (isNaN(newy)) {
-        throw Error("数値を設定してください");
+        throw new Error("数値を設定してください");
       }
       const oldx = this.x;
       this.r = Math.hypot(oldx, newy);
