@@ -4,9 +4,9 @@
   const object = {};
   Object.defineProperty(object, "w1e1c1", {
     value: 0,
-    writable: true,
-    enumerable: true,
-    configurable: true,
+    writable: true, // 書き込み可能
+    enumerable: true, // 列挙可能
+    configurable: true, // 再定義（削除、属性の変更）が可能
   });
 
   Object.defineProperty(object, "w0e1c1", {
@@ -66,8 +66,15 @@
   console.log("w1e1c0" in object); // true
 
   console.log("=====列挙可の実験=====");
+  // hasOwnProperty では属性に関わらず、自身のプロパティとして存在すれば true になる
   console.log(object.hasOwnProperty("w1e1c1")); // true
   console.log(object.hasOwnProperty("w1e0c1")); // true
-  console.log(object.propertyIsEnumerable("w1e1c1")); /// true
+  console.log(object.hasOwnProperty("w0e1c1")); // true
+  console.log(object.hasOwnProperty("w1e1c0")); // true
+
+  // propertyIsEnumerable では列挙可な自身のプロパティが true となる
+  console.log(object.propertyIsEnumerable("w1e1c1")); // true
   console.log(object.propertyIsEnumerable("w1e0c1")); // false
+  console.log(object.propertyIsEnumerable("w0e1c1")); // true
+  console.log(object.propertyIsEnumerable("w1e1c0")); // true
 }
