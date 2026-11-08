@@ -32,7 +32,7 @@ export function substract(target, ...sources) {
   }
 
   // 削除対象を一つにまとめる
-  const assignedSources = Object.assign(...sources);
+  const assignedSources = Object.assign({}, ...sources);
 
   // target の独自プロパティを1つずつ
   // sources の独自プロパティに存在するか確認する
