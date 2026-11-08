@@ -32,7 +32,12 @@ const obj = {
 };
 
 const answer = {
-  ...obj,
+  num1,
+  num2,
+  ...obj1,
+  ...obj3,
+  ...obj2,
+  arr: [...arr1, num1, ...arr2],
 };
 
 test("スプレッド演算子", () => {
