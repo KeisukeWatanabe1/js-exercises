@@ -32,10 +32,8 @@ export function some(arr, condition) {
   if (arr.length === 0) {
     return false;
   }
-  return (
-    arr.reduce(
-      (judge, elem, index, arr) => judge || condition(elem, index, arr),
-      0,
-    ) > 0
+  return arr.reduce(
+    (judge, elem, index, arr) => judge || condition(elem, index, arr),
+    false,
   );
 }
