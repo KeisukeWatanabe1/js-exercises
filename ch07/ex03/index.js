@@ -23,7 +23,7 @@ export function every(arr, condition) {
     return true;
   }
   return arr.reduce(
-    (judge, elem, index, arr) => judge * condition(elem, index, arr),
+    (judge, elem, index, arr) => judge && condition(elem, index, arr),
     true,
   );
 }
@@ -34,7 +34,7 @@ export function some(arr, condition) {
   }
   return (
     arr.reduce(
-      (judge, elem, index, arr) => judge + condition(elem, index, arr),
+      (judge, elem, index, arr) => judge || condition(elem, index, arr),
       0,
     ) > 0
   );
