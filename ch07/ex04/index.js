@@ -23,6 +23,17 @@ console.log(
   ),
 ); // => 45
 
+// 最後に一度だけ、人数で割った方が誤差が少ない
+console.log(
+  classA.reduce((sum, elem, index, arr) => {
+    sum += elem.chemistry;
+    if (index === arr.length - 1) {
+      return sum / arr.length;
+    }
+    return sum;
+  }, 0),
+); // => 45
+
 // クラスCの生徒の3科目合計点の平均点
 const classC = data.filter((elem) => elem.class === "C");
 console.log(
@@ -32,6 +43,17 @@ console.log(
     0,
   ),
 ); // => 176.66666666666669
+
+// 最後に一度だけ、人数で割った方が誤差が少ない
+console.log(
+  classC.reduce((sum, elem, index, arr) => {
+    sum += elem.math + elem.chemistry + elem.geography;
+    if (index === arr.length - 1) {
+      return sum / arr.length;
+    }
+    return sum;
+  }, 0),
+); // => 176.66666666666666
 
 // 3科目合計点が最も高い人のname
 const maxOfAllSubjects = data.reduce(
