@@ -1,6 +1,6 @@
 function fizzbuzz(n) {
   // [1, 2, ..., n] という配列を作る
-  // length が n のオブジェクトに対して、map を適用することで、
+  // length が n の配列風オブジェクトに対して、mapFn を適用することで、
   // 0, 1, ..., n - 1 とインデックスが取れるため、1を足すことで、
   // 1, 2, ..., n を得る
   const arr = Array.from({ length: n }, (_, i) => i + 1);
