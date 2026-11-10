@@ -14,15 +14,22 @@ const data = [
 // ただし、mathが同点数の場合はchemistryの点数が高い順に、
 // さらに同点数の場合はgeographyの点数が高い順にソートする
 data.sort((a, b) => {
-  if (a.math === b.math) {
-    if (a.chemistry === b.chemistry) {
-      return b.geography - a.geography;
-    } else {
-      return b.chemistry - a.chemistry;
-    }
-  } else {
-    return b.math - a.math;
-  }
+  // if (a.math === b.math) {
+  //   if (a.chemistry === b.chemistry) {
+  //     return b.geography - a.geography;
+  //   } else {
+  //     return b.chemistry - a.chemistry;
+  //   }
+  // } else {
+  //   return b.math - a.math;
+  // }
+
+  // 差が0の時は、falsyなので右側が評価される。
+  // 0以外の時は、truthyなので左側で確定する。
+  // 結果的に、math, chemistry, geographyの順で比較できる
+  return (
+    b.math - a.math || b.chemistry - a.chemistry || b.geography - a.geography
+  );
 });
 
 console.log(data);
