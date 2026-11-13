@@ -12,7 +12,8 @@ const obj = {
 };
 
 // ここに１行のコードを書く
-obj.toJSON = () => ({ x: obj.x, y: obj.y, sum: obj.sum() });
+obj.sum.toJSON = () => obj.sum();
+// obj.toJSON = () => ({ x: obj.x, y: obj.y, sum: obj.sum() });
 
 test("JSON.stringify", () => {
   obj.x = 1;
